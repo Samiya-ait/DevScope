@@ -14,53 +14,116 @@
         <h5>DevScope</h5>
       </div>
       <ul class="flex gap-4">
-        <li>Recherche</li>
-        <li>Shortlist</li>
+        <li><a href="index.html">Recherche</a></li>
+        <li><a href="shortlist.html">Shortlist</a></li>
       </ul>
     </header>
 
     <section>
-      <div class="flex w-[90vw] rounded-xl m-1 p-2 bg-slate-300">
-        <input type="search" />
-        <button>Rechercher</button>
+      <div class="flex w-[90vw] rounded-xl m-1 p-2 bg-slate-300 justify-between ">
+        <input type="search" class="w-full" />
+        <button class="">Rechercher</button>
       </div>
     </section>
-    <main>
-      <aside>
-        <img src="" alt="" class="rounded-full border border-red-600 ">
+    <main class="flex  justify-between w-[90vw] gap-5">
+      <aside class="w-1/4 flex flex-col justify-center items-center bg-slate-600">
+        <div class="">
+            <img
+          src="https://pin.it/5tIDms81X"
+          width="100px"
+          height="100px"
+          alt="profil"
+          class="rounded-full border border-red-600"
+        />
         <div>
-            <h2></h2>
-        <h5></h5>
+          <h2>FULL NAME</h2>
+          <h5>name</h5>
         </div>
-        <p></p>
-        <div>
-            <p></p>
-            <p></p>
+        <p>description</p>
         </div>
-        <div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <button></button>
-        <button></button>
         
+        <div class="bg-slate-300 my-2">
+          <p>📍location</p>
+          <p>📆 date de rejoindre</p>
+        </div>
+        <div class="flex gap-5">
+          <div class="bg-slate-300">DEPOT nbr</div>
+          <div class="bg-slate-300">FOLLOWERS nbr</div>
+          <div class="bg-slate-300">FOLLOWING nbr</div>
+        </div>
+        <button class="bg-slate-300 my-2">ajouter à la shortList</button>
+        <button class="bg-slate-300">voir le profil original</button>
       </aside>
-      <section>
-        <h1></h1>
-        <article>
-            <div>
-                <h5></h5>
-                <p></p>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-                <p></p>
-            </div>
+      <section class="w-3/4">
+        <div class="flex gap-2 items-center my-2">
+          <h1 class="text-xl ">Dépots</h1>
+          <p class="bg-blue-300 text-xs ">nbr depots</p>
+        </div>
+
+        <article class="grid grid-cols-2 grid-rows-3 gap-10">
+          <div class="bg-slate-300">
+            <h5 class="font-bold">titre du projet</h5>
+            <p class="text-xs">description depo</p>
+            <ul class="text-xs flex gap-3">
+              <li class="font-bold">langage</li>
+              <li>stars</li>
+              <li>forks</li>
+            </ul>
+            <p class="text-xs">date de mise a jour</p>
+          </div>
+          <div>
+            <h5 class="font-bold">titre du projet</h5>
+            <p class="text-xs">description depo</p>
+            <ul class="text-xs flex gap-3">
+              <li class="font-bold">langage</li>
+              <li>stars</li>
+              <li>forks</li>
+            </ul>
+            <p class="text-xs">date de mise a jour</p>
+          </div>
+          <div>
+            <h5 class="font-bold">titre du projet</h5>
+            <p class="text-xs">description depo</p>
+            <ul class="text-xs flex gap-3">
+              <li class="font-bold">langage</li>
+              <li>stars</li>
+              <li>forks</li>
+            </ul>
+            <p class="text-xs">date de mise a jour</p>
+          </div>
+          <div>
+            <h5 class="font-bold">titre du projet</h5>
+            <p class="text-xs">description depo</p>
+            <ul class="text-xs flex gap-3">
+              <li class="font-bold">langage</li>
+              <li>stars</li>
+              <li>forks</li>
+            </ul>
+            <p class="text-xs">date de mise a jour</p>
+          </div>
+          <div>
+            <h5 class="font-bold">titre du projet</h5>
+            <p class="text-xs">description depo</p>
+            <ul class="text-xs flex gap-3">
+              <li class="font-bold">langage</li>
+              <li>stars</li>
+              <li>forks</li>
+            </ul>
+            <p class="text-xs">date de mise a jour</p>
+          </div>
+          <div>
+            <h5 class="font-bold">titre du projet</h5>
+            <p class="text-xs">description depo</p>
+            <ul class="text-xs flex gap-3">
+              <li class="font-bold">langage</li>
+              <li>stars</li>
+              <li>forks</li>
+            </ul>
+            <p class="text-xs">date de mise a jour</p>
+          </div>
         </article>
       </section>
     </main>
+    <script type="module" src=""></script>
   </body>
 </html>
