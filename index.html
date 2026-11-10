@@ -20,12 +20,15 @@
     <main class="flex flex-col items-center justify-center text-center h-screen">
       <h1 class="text-4xl">Trouvez les meilleurs developpeurs grace a leur code</h1>
       <h5 class="text-xl">analyser un profil,ses projets et ses langages en quelques sec</h5>
+      <form action="" id="form">
       <div class="border border-blue-500">
-        <input type="search" placeholder="entrez un nom d'utilisateur.." class="field-sizing-content" />
-        <button class="bg-slate-300 rounded-l">analyser</button>
+        <input id="input" type="search" placeholder="entrez un nom d'utilisateur.." class="field-sizing-content" />
+        <button id="btn" type="submit" class="bg-slate-300 rounded-l">analyser</button>
       </div>
+      <p id="error"></p>
+      </form>
     </main>
     <a href="profile.html">profile</a>
-    <script type="module" src=""></script>
+    <script type="module" src="js/recherche.js"></script>
   </body>
 </html>
