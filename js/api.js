@@ -1,4 +1,3 @@
-import {displayProfile,displayRepo,user} from './profile.js'
 
 
 export async function getUser(username) {
@@ -16,15 +15,15 @@ export async function getUser(username) {
         }
 
         let data = await response.json();
-        console.log(data)
-        displayProfile(data);
-        
+        return data;
+
+
 
     } catch (error) {
         console.error(error.message);
+        throw error;
     }
 }
-getUser(user)
 
 
 export async function getUserRepos(username) {
@@ -38,8 +37,7 @@ export async function getUserRepos(username) {
         }
 
         let data = await response.json();
-        console.log(data)
-        displayRepo(data);
+        return data;
 
     } catch (error) {
         console.error(error.message);
@@ -47,4 +45,3 @@ export async function getUserRepos(username) {
     }
 }
 
-getUserRepos(user)
