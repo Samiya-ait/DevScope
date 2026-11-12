@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <title>profile</title>
   </head>
-  <body class="flex flex-col items-center w-screen h-screen overflow-hidden">
+  <body class="flex flex-col items-center w-screen h-screen overflow-hidden font-[Nunito]">
     <header
       class="flex justify-between bg-slate-600 text-white w-[90vw] rounded-xl m-1 p-2"
     >
@@ -19,19 +24,30 @@
       </ul>
     </header>
 
+  
+      
     <section>
-      <div class="flex w-[90vw] rounded-xl m-1 p-2 bg-slate-300 justify-between ">
-        <input type="search" class="w-full" />
-        <button class="">Rechercher</button>
+      <form action="" id="form">
+      <div class="flex w-[90vw] rounded-xl my-3 p-2 bg-slate-300 justify-between border border-blue-500 rounded-xl">
+        <input id="input" type="search" class="w-full  outline-none"  />
+        <button id="btn" class="">Rechercher</button>
       </div>
+      </form>
     </section>
-    <main class="flex  justify-between w-[90vw] gap-5">
+    <main class="flex   w-[90vw] gap-5">
       <aside id="aside" class="w-1/4 flex flex-col justify-center items-center bg-slate-600">
       </aside>
-      <section id="section" class="w-3/4">
+      <section class="w-[90%]" >
+        <div class="flex gap-2 items-center my-2">
+          <h1 class="text-xl ">Dépots</h1>
+          <p id="total-repos" class="bg-blue-300 text-xs "></p>
+        </div>  
+        <section id="section" class=" grid grid-cols-3 w-[90%] gap-5">
+
+        </section>
       </section>
     </main>
     <script type="module" src="js/profile.js"></script>
-    <script type="module" src="js/api.js"></script>
+    
   </body>
 </html>
