@@ -29,7 +29,7 @@ export async function getUser(username) {
 export async function getUserRepos(username) {
     try {
         const response = await fetch(
-            `https://api.github.com/users/${username}/repos?per_page=10&sort=updated`
+            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`
         );
 
         if (!response.ok) {
