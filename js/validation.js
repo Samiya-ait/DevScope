@@ -5,7 +5,7 @@ export function validation(input){
     let inputValue=input.value.trim()
     if (!(validRegex.test(inputValue))){
         error.textContent = "1 à 39 caractères : lettres, chiffres et tirets uniquement (sans tiret au début ni à la fin).";
-        error.classList.add("text-red-600")
+        error.classList.add("text-red-600","text-xs")
         return;
     }else{
         return inputValue;
