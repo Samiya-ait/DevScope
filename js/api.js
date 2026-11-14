@@ -1,3 +1,5 @@
+import { api } from "./config.js";
+
 
 
 export async function getUser(username) {
@@ -25,12 +27,16 @@ export async function getUser(username) {
     }
 }
 
-
 export async function getUserRepos(username) {
     try {
         const response = await fetch(
-            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`
-        );
+            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: "application/vnd.github+json"
+                }
+            })
 
         if (!response.ok) {
             throw new Error("Impossible de récupérer les repositories");
@@ -41,6 +47,19 @@ export async function getUserRepos(username) {
 
     } catch (error) {
         console.error(error.message);
+        throw error;
+    }
+}
+
+export async function getCandidats() {
+    try {
+        const response = await fetch(api)
+        if (!response.ok) {
+            throw new Error("impossible de récuperer les candidats")
+        }
+        return await response.json()
+    } catch (error) {
+        console.error(error.message)
         throw error;
     }
 }
