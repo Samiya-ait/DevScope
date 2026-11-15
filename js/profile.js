@@ -20,33 +20,34 @@ export function displayProfile() {
   const dateAcc = new Date(user.created_at).toLocaleDateString("fr-FR", { month: "long", year: "numeric" })
 
 
-  profile.innerHTML =`<div class="">
+  profile.innerHTML =`
+  <div class ="text-white text-center  ">
             <img
           src="${user.avatar_url}"
           width="100px"
           height="100px"
           alt="profil"
-          class="rounded-full border border-red-600"
+          class="rounded-full border-2 border-white"
         />
-        <div>
+        <div class="">
           <h2>${user.name || user.login}  </h2>
-          <h5>@${user.login}</h5>
+          <h5 class="text-pink-600">@${user.login}</h5>
         </div>
         <p>${user.bio || "Aucune bio renseignée"}  </p>
         </div>
         
-        <div class="bg-slate-300 my-2">
+        <div class="bg-white  my-2 font-bold rounded-xl">
           <p>📍${user.location || "Localisation non renseignée"}</p>
           <p>📆 ${dateAcc}</p>
         </div>
-        <div class="flex gap-5">
-          <div class="bg-slate-300">${user.public_repos}</div>
-          <div class="bg-slate-300">${user.followers}</div>
-          <div class="bg-slate-300">${user.following}</div>
+        <div class="flex gap-5 m-2">
+          <div class="bg-pink-600 text-white rounded-full p-1">${user.public_repos}</div>
+          <div class="bg-pink-600 text-white rounded-full p-1">${user.followers}</div>
+          <div class="bg-pink-600 text-white rounded-full p-1">${user.following}</div>
         </div>
-        <button id="btn-ajouter" class=" bg-slate-300 my-1">ajouter à la shortList</button>
+        <button id="btn-ajouter" class=" bg-slate-300 m-2 px-3 rounded-xs text-black font-bold">ajouter à la shortList</button>
         <p class="mssg text-xs text-red-600"></p>
-        <button id="btn-profile" class="bg-slate-300 my-1">voir le profil original</button>
+        <button id="btn-profile" class="bg-slate-300 m-2 px-3 rounded-xs text-black font-bold">voir le profil original</button>
         
         `
 
@@ -75,8 +76,8 @@ export async function displayRepo() {
 
     repositories.innerHTML += ` 
         <article class= gap-10"grid grid-cols-2 grid-rows-3">
-          <div class="bg-slate-300">
-            <h5 class="font-bold">${repo.name}</h5>
+          <div class="bg-white rounded-lg p-1">
+            <h5 class="font-bold text-pink-800">${repo.name}</h5>
             <p class="text-xs">${repo.description || "Pas de description"}</p>
             <ul class="text-xs flex gap-3">
               <li class="font-bold">${repo.language}</li>
@@ -137,12 +138,12 @@ ajouter.addEventListener("click", async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(candidat)
   });
- 
+
 })
 
 const profil = document.querySelector("#btn-profile")
-profil.addEventListener("click",e=>{
-   window.open(user.html_url, "_blank");
+profil.addEventListener("click", e => {
+  window.open(user.html_url, "_blank");
 })
 
 

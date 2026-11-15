@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <title>recherche</title>
   </head>
-  <body class="flex flex-col items-center w-screen h-screen overflow-hidden font-[Nunito]">
-    <header class="flex justify-between bg-slate-600 text-white w-[90vw] rounded-xl m-1 p-2">
+  <body class="flex flex-col items-center w-screen h-screen overflow-hidden font-[Nunito] bg-gradient-to-r from-[#232347] from-0% via-[#790934] via-35% to-[#ff0073] to-100%">
+    <header class="flex justify-between  w-[90vw] rounded-xl m-1 p-2 bg-pink-100 text-slate-600 font-bold ">
       <div>
         <h5>DevScope</h5>
       </div>
@@ -21,12 +21,12 @@
     </header>
 
     <main class="flex flex-col items-center justify-center text-center h-screen">
-      <h1 class="text-4xl">Trouvez les meilleurs developpeurs grace a leur code</h1>
-      <h5 class="text-xl">analyser un profil,ses projets et ses langages en quelques sec</h5>
+      <h1 class="text-5xl text-white">Trouvez les meilleurs developpeurs <br> grace a leur code</h1>
+      <h5 class="text-xl text-slate-900 opacity-75 font-bold">analyser un profil,ses projets et ses langages en quelques sec</h5>
       <form action="" id="form">
-      <div class="border border-blue-500 rounded-xl m-2">
-        <input id="input" type="search" placeholder="entrez un nom d'utilisateur.." class="w-100 m-1 outline-none" />
-        <button id="btn" type="submit" class="bg-slate-300 rounded-xl px-2">analyser</button>
+      <div class="border-2 border-white rounded-xl m-2 mt-5">
+        <input id="input" type="search" placeholder="entrez un nom d'utilisateur.." class="w-100 m-1 outline-none text-white" />
+        <button id="btn" type="submit" class="bg-slate-300 text-slate-600 font-bold rounded-xl px-2">analyser</button>
       </div>
       <p id="error"></p>
       </form>
