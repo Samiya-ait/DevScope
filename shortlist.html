@@ -27,10 +27,67 @@
       </ul>
     </header>
     <section>
-      <h1 class="text-3xl font-bold text-slate-900">Ma ShortList</h1>
+      <h1 class="text-3xl text-center font-bold text-slate-900">
+        Ma ShortList
+      </h1>
       <p class="compteur text-xs text-center font-bold text-white"></p>
+      <div class="flex gap-10 m-2">
+        <ul class="flex gap-5 text-slate-900 underline underline-offset-8">
+          <li class="">tous</li>
+          <li>a contacter</li>
+          <li>entretien</li>
+          <li>retenu</li>
+          <li>refusé</li>
+        </ul>
+        <input
+          type="search"
+          class="opacity-75 rounded-lg border border-white w-100 bg-gray-100"
+          placeholder="à rechercher..."
+        />
+      </div>
     </section>
-    <main class="container grid grid-cols-2 grid-rows-3 gap-5 w-3/4 m-2 "></main>
+    <main class="container grid grid-cols-2 grid-rows-3 gap-5 w-3/4 m-2"></main>
+
+    <!-- update -->
+    <dialog id="updateD" class="m-auto w-96 rounded-xl border-none p-6">
+      <h1>Modifier</h1>
+      <form action="">
+        <p>
+          <label for="status">status:</label>
+          <select id="status">
+            <option value="a_contacter">A contacter</option>
+            <option value="refusé">Refusé</option>
+          </select>
+        </p>
+        <p>
+          <label for="note">note:</label>
+          <input type="text" id="note" />
+        </p>
+
+        <label for="rating">rating:</label>
+        <select name="" id="rating">
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★✰</option>
+          <option value="3">★★★✰✰</option>
+          <option value="2">★★✰✰✰</option>
+          <option value="1">★✰✰✰✰</option>
+        </select>
+        <div>
+          <button id="save" type="submit">Enregistrer</button>
+          <button type="button" id="cancelUp" class="cancelUp">Annuler</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- delete -->
+    <dialog id="deleteD" class="m-auto w-96 rounded-xl border-none p-6">
+      <h1>Supprimer</h1>
+      <p>Voulez-vous supprimer ce candidat?</p>
+      <div>
+        <button id="delete" class="delete">Supprimer</button>
+        <button type="button" id="cancelDlt" class="cancelDlt">Annuler</button>
+      </div>
+    </dialog>
     <script type="module" src="js/shortlist.js"></script>
   </body>
 </html>
