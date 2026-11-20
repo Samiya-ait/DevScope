@@ -40,10 +40,10 @@ export function displayProfile() {
           <p>📍${user.location || "Localisation non renseignée"}</p>
           <p>📆 ${dateAcc}</p>
         </div>
-        <div class="flex gap-5 m-2">
-          <div class="bg-pink-600 text-white rounded-full p-1">${user.public_repos}</div>
-          <div class="bg-pink-600 text-white rounded-full p-1">${user.followers}</div>
-          <div class="bg-pink-600 text-white rounded-full p-1">${user.following}</div>
+        <div class="flex gap-5 m-2 ">
+          <div class="bg-pink-600 text-white rounded-full p-1 text-center text-xs">${user.public_repos}<p class="text-xs">Dépots</p></div>
+          <div class="bg-pink-600 text-white rounded-full p-1 text-center text-xs">${user.followers}<p class="text-xs">Abonnées</p></div>
+          <div class="bg-pink-600 text-white rounded-full p-1 text-center text-xs">${user.following}<p class="text-xs">Abonnements</p></div>
         </div>
         <button id="btn-ajouter" class=" bg-slate-300 m-2 px-3 rounded-xs text-black font-bold">ajouter à la shortList</button>
         <p class="mssg text-xs text-red-600"></p>
@@ -53,13 +53,12 @@ export function displayProfile() {
 
   total.textContent = user.public_repos
 }
-
+const userRepo = await getUserRepos(username)
 displayProfile();
 
 
 export async function displayRepo() {
 
-  const userRepo = await getUserRepos(username)
   repositories.innerHTML = ""
 
   userRepo.forEach(repo => {
@@ -75,12 +74,12 @@ export async function displayRepo() {
     }
 
     repositories.innerHTML += ` 
-        <article class= gap-10"grid grid-cols-2 grid-rows-3">
+        <article class=repo gap-10"grid grid-cols-2 grid-rows-3">
           <div class="bg-white rounded-lg p-1">
-            <h5 class="font-bold text-pink-800">${repo.name}</h5>
+            <h5 class="nameTitle font-bold text-pink-800">${repo.name}</h5>
             <p class="text-xs">${repo.description || "Pas de description"}</p>
             <ul class="text-xs flex gap-3">
-              <li class="font-bold">${repo.language}</li>
+              <li class="lang font-bold">${repo.language}</li>
               <li><i class="fa-solid fa-star fa-sm" style="color: rgb(255, 212, 59);"></i>${repo.stargazers_count}</li>
               <li><i class="fa-solid fa-code-fork"></i>${repo.forks_count}</li>
             </ul>
@@ -91,21 +90,12 @@ export async function displayRepo() {
       
     `
   })
+
+
 }
 
 displayRepo()
 
-const form = document.querySelector("#form")
-const input = document.querySelector("#input")
-
-
-form.addEventListener("submit", async (event) => {
-  event.preventDefault()
-  let name = validation(input)
-  let user = await getUser(name)
-
-  window.location.href = `/profile.html?username=${encodeURIComponent(user.login)}`
-})
 
 const ajouter = document.querySelector("#btn-ajouter")
 
@@ -119,16 +109,16 @@ ajouter.addEventListener("click", async (e) => {
     name: user.name,
     avatar_url: user.avatar_url,
     html_url: user.html_url,
-    language: user.language,
-    rating: user.rating,
-    status: user.status,
+    language: "HTML",
+    rating: 5,
+    status: "refusé",
     note: "",
     createdAt: new Date().toISOString()
   }
 
   const results = await fetch(api)
   const candidats = await results.json()
-  const exist = candidats.some(elt => elt.login === user.login)
+  const exist = candidats.some(elt => elt.login === candidat.login)
   if (exist) {
     mssg.textContent = "ce candidat est déja exist"
     return
@@ -146,9 +136,101 @@ profil.addEventListener("click", e => {
   window.open(user.html_url, "_blank");
 })
 
+// const form = document.querySelector("#form")
+
+// form.addEventListener("submit", async (event) => {
+//   event.preventDefault()
+//   let name = validation(input)
+//   let user = await getUser(name)
+
+//   window.location.href = `/profile.html?username=${encodeURIComponent(user.login)}`
+// })
 
 
 
+
+
+
+
+
+const input = document.querySelector("#input")
+
+let repos = document.querySelectorAll(".repo")
+// 
+input.addEventListener("input", () => {
+
+  let depotInput = input.value.toLowerCase().trim()
+  repos.forEach(p => {
+    let name = p.querySelector(".nameTitle").textContent.toLowerCase().trim()
+
+    if (name.includes(depotInput)) {
+      p.style.display = "block"
+    }
+    else {
+      p.style.display = "none"
+
+    }
+  })
+})
+
+const filtres = document.querySelectorAll(".filtre")
+
+// let searched =userRepo.filter(elt=>elt.name.toLowerCase().includes(depotInput))
+
+filtres.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    let filter = e.target.dataset.cat
+    // console.log(filter)
+    if (filter === "tous") {
+      console.log(userRepo)
+    }
+    else {
+      console.log("filter:", filter.toLowerCase())
+
+      repos.forEach(p => {
+        let lang = p.querySelector(".lang").textContent.toLowerCase().trim()
+        // console.log("lang:",lang)
+        if (lang === filter.toLowerCase()) {
+          p.style.display = "block"
+        }
+        else {
+          p.style.display = "none"
+        }
+
+      })
+      // let res= userRepo.filter(elt=>{elt.language==filter})
+      // console.table("other cat")
+
+
+    }
+  })
+})
+
+//my method of search and filter
+
+// let depotInput = ""
+// let filter = "tous"
+
+// const input = document.querySelector("#input")
+// const filtres = document.querySelectorAll(".filtre")
+
+
+// filtres.forEach(btn => {
+//   btn.addEventListener("click", (e) => {
+//      filter = e.target.dataset.cat
+//   })
+// })
+//     input.addEventListener("input", () => {
+
+//        depotInput = input.value.toLowerCase().trim()})
+
+  
+//   let searched=userRepo.filter(elt=>elt.name.includes(depotInput))
+//   if(filter==="tous"){
+//     return searched;
+//   }else{
+//     return searched.filter(elt=>{elt.language.toLowerCase()===filter.toLowerCase()})
+//   }
 
 
 
