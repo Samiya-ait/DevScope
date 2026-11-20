@@ -17,6 +17,7 @@ export async function getUser(username) {
         }
 
         let data = await response.json();
+        console.table(data)
         return data;
 
 
@@ -30,19 +31,14 @@ export async function getUser(username) {
 export async function getUserRepos(username) {
     try {
         const response = await fetch(
-            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    Accept: "application/vnd.github+json"
-                }
-            })
+            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`)
 
         if (!response.ok) {
             throw new Error("Impossible de récupérer les repositories");
         }
 
         let data = await response.json();
+        console.table(data)
         return data;
 
     } catch (error) {
@@ -64,3 +60,12 @@ export async function getCandidats() {
     }
 }
 
+export async function updateCandidate(id, candidat) {
+    const reponse = await fetch(`${api}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(candidat),
+    });
+    if (!reponse.ok) throw new Error(`Erreur HTTP ${reponse.status}`);
+    return reponse.json();
+}
