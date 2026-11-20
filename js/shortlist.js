@@ -1,4 +1,5 @@
-import { getCandidats, updateCandidate } from "./api.js";
+import { getCandidats, updateCandidate,deleteCandidat } from "./api.js";
+
 
 const container = document.querySelector(".container")
 let compteur = document.querySelector(".compteur")
@@ -59,14 +60,15 @@ const deleteB = document.querySelector("#delete")
 
 
 let idUpdate = null
-
-container.addEventListener("click", (e) => {
+let idDelete=null
+container.addEventListener("click", async(e) => {
     // modifier modal
     const click = e.target.closest("[data-action]")
+    if(!click)return;
+    
+    const id = click.closest(".carte").id
+
     if (click.dataset.action === "modifier") {
-        const id = click.closest(".carte").id
-
-
         const c = candidats.find(elt => elt.id === id)
         note.value = c.note
         status.value = c.status
@@ -77,7 +79,9 @@ container.addEventListener("click", (e) => {
     }
     // delete model
     if (click.dataset.action === "supprimer") {
+        idDelete = id
         deleteModal.showModal();
+        
     }
 
 });
@@ -118,9 +122,22 @@ updateModal.addEventListener("click", (e) => {
 
 })
 
-deleteModal.addEventListener("click", (e) => {
-    const click = e.target.closest(".cancelDlt")
-    if (click) {
-        deleteModal.close()
+deleteB.addEventListener("click",async(e)=>{
+    await deleteCandidat(idDelete);
+
+        candidats = candidats.filter(
+            n => n.id !== idDelete
+        );
+        displayCandidat();
+
+        idDelete = null;
+        deleteModal.close();
+
+})
+
+    deleteModal.addEventListener("click", (e) => {
+    if(e.target.closest(".cancelDlt")){
+        deleteModal.cancel();
     }
 })
+

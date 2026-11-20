@@ -69,3 +69,9 @@ export async function updateCandidate(id, candidat) {
     if (!reponse.ok) throw new Error(`Erreur HTTP ${reponse.status}`);
     return reponse.json();
 }
+
+export async function  deleteCandidat(id){
+    const reponse = await fetch(`${api}/${id}`
+            , { method: "DELETE" });
+        if (!reponse.ok) throw new Error(`Erreur HTTP ${reponse.status}`);
+}
