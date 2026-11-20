@@ -28,21 +28,27 @@
         <li><a href="shortlist.html">Shortlist</a></li>
       </ul>
     </header>
-
-    
-      <form action="" id="form" class=" ">
         <div
-          class="flex w-[90vw]  my-3 p-1 bg-slate-900 justify-between border border-white "
+          class="flex w-[30vw]  my-3 p-1 bg-slate-900 justify-between border border-white "
         >
-          <input id="input" type="search" class="w-full outline-none " />
+          <input id="input" type="search" class="w-full outline-none text-white" />
           <button id="btn" class=""><i class="fa-solid fa-magnifying-glass" style="color: white"></i></button>
         </div>
-      </form>
+        <div>
+          <ul class="options flex gap-5 text-white cursor-pointer">
+            <li data-cat="tous" class="filtre" >Tous</li>
+            <li data-cat="javaScript" class="filtre">JavaScript</li>
+            <li data-cat="python" class="filtre">Python</li>
+            <li data-cat="java" class="filtre">Java</li>
+            <li data-cat="c++" class="filtre">C++</li>
+          </ul>
+        </div>
+     
     
     <main class="flex w-[90vw] gap-5">
       <aside
         id="aside"
-        class="w-1/4 flex flex-col justify-center items-center  bg-slate-900 rounded-xl"
+        class="w-1/4 flex flex-col justify-center items-center  bg-slate-900 rounded-xl "
       ></aside>
       <section class="w-[90%]">
         <div class="flex gap-2 items-center my-2">
