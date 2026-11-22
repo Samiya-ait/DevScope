@@ -1,4 +1,4 @@
-import { getCandidats, updateCandidate,deleteCandidat } from "./api.js";
+import { getCandidats, updateCandidate, deleteCandidat } from "./api.js";
 
 
 const container = document.querySelector(".container")
@@ -6,10 +6,10 @@ let compteur = document.querySelector(".compteur")
 
 
 let candidats = await getCandidats()
-function displayCandidat() {
+function displayCandidat(list = candidats) {
     container.innerHTML = ""
 
-    candidats.forEach(elt => {
+    list.forEach(elt => {
         const dateAj = new Date(elt.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit" })
         container.innerHTML +=`
      <div id=${elt.id} class="carte flex border-2 border-slate-900 justify-between">
@@ -38,7 +38,7 @@ function displayCandidat() {
       </div>`
     });
 
-    compteur.textContent = `${candidats.length} candidat(s) dans shortList`
+    compteur.textContent = `${list.length} candidat(s) dans shortList`
 
 }
 
@@ -60,12 +60,12 @@ const deleteB = document.querySelector("#delete")
 
 
 let idUpdate = null
-let idDelete=null
-container.addEventListener("click", async(e) => {
+let idDelete = null
+container.addEventListener("click", async (e) => {
     // modifier modal
     const click = e.target.closest("[data-action]")
-    if(!click)return;
-    
+    if (!click) return;
+
     const id = click.closest(".carte").id
 
     if (click.dataset.action === "modifier") {
@@ -81,7 +81,7 @@ container.addEventListener("click", async(e) => {
     if (click.dataset.action === "supprimer") {
         idDelete = id
         deleteModal.showModal();
-        
+
     }
 
 });
@@ -122,22 +122,46 @@ updateModal.addEventListener("click", (e) => {
 
 })
 
-deleteB.addEventListener("click",async(e)=>{
+deleteB.addEventListener("click", async (e) => {
     await deleteCandidat(idDelete);
 
-        candidats = candidats.filter(
-            n => n.id !== idDelete
-        );
-        displayCandidat();
+    candidats = candidats.filter(
+        n => n.id !== idDelete
+    );
+    displayCandidat();
 
-        idDelete = null;
-        deleteModal.close();
+    idDelete = null;
+    deleteModal.close();
 
 })
 
-    deleteModal.addEventListener("click", (e) => {
-    if(e.target.closest(".cancelDlt")){
+deleteModal.addEventListener("click", (e) => {
+    if (e.target.closest(".cancelDlt")) {
         deleteModal.cancel();
     }
 })
+let filter="tous"
+let search=""
 
+const ul=document.querySelector(".filters")
+const input=document.querySelector(".input")
+
+ul.addEventListener("click",(e)=>{
+     filter = e.target.dataset.cat
+     filterS()
+})
+
+input.addEventListener("input",(e)=>{
+     search=input.value.trim().toLowerCase()
+     filterS()
+})
+
+function filterS(){
+    let searched=candidats.filter(elt=>(elt.name || elt.login).toLowerCase().includes(search))
+    if (filter==="tous"){
+        displayCandidat(searched)
+    }else{
+        let filtred=searched.filter(elt=>(elt.status || "").toLowerCase()===filter.toLowerCase())
+        displayCandidat(filtred)
+    }
+}

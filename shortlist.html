@@ -32,16 +32,14 @@
       </h1>
       <p class="compteur text-xs text-center font-bold text-white"></p>
       <div class="flex gap-10 m-2">
-        <ul class="flex gap-5 text-slate-900 underline underline-offset-8">
-          <li class="">tous</li>
-          <li>a contacter</li>
-          <li>entretien</li>
-          <li>retenu</li>
-          <li>refusé</li>
+        <ul class=" filters flex gap-5 text-slate-900 underline underline-offset-8">
+          <li data-cat="tous">tous</li>
+          <li data-cat="a_contacter">a contacter</li>
+          <li data-cat="refusé">refusé</li>
         </ul>
         <input
           type="search"
-          class="opacity-75 rounded-lg border border-white w-100 bg-gray-100"
+          class=" input opacity-75 rounded-lg border border-white w-100 bg-gray-100"
           placeholder="à rechercher..."
         />
       </div>
