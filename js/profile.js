@@ -173,6 +173,8 @@ const filtres = document.querySelectorAll(".filtre")
 filtres.forEach(btn => {
   btn.addEventListener("click", (e) => {
     filter = e.target.dataset.cat
+    filtres.forEach(b => b.classList.remove("font-bold", "text-slate-900"))
+btn.classList.add("font-bold", "text-slate-900")
     filtredSearch()
   })
 })
