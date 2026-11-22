@@ -1,7 +1,6 @@
-import { getCandidats, getUser, getUserRepos } from "./api.js";
+import {  getUser, getUserRepos } from "./api.js";
 import { getUserCache, setUserCache } from "./cache.js";
 import { api } from "./config.js";
-import { validation } from './validation.js'
 
 
 const params = new URLSearchParams(window.location.search)
@@ -90,7 +89,7 @@ export async function displayRepo(list = userRepo) {
     }
 
     repositories.innerHTML += ` 
-        <article class=repo gap-10"grid grid-cols-2 grid-rows-3">
+        <article >
           <div class="bg-white rounded-lg p-1">
             <h5 class="nameTitle font-bold text-pink-800">${repo.name}</h5>
             <p class="text-xs">${repo.description || "Pas de description"}</p>
