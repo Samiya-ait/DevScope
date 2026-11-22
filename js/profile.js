@@ -8,25 +8,25 @@ const params = new URLSearchParams(window.location.search)
 const username = params.get("username")
 
 
-const main=document.querySelector(".main")
+const main = document.querySelector(".main")
 const profile = document.querySelector("#aside")
 const repositories = document.querySelector("#section")
 const total = document.querySelector("#total-repos")
 
 // const user = await getUser(username)
 const key = username.toLowerCase()
-let data=getUserCache(key)
-if(!data){
-      try{
-const[user,repos]=await Promise.all([getUser(key),getUserRepos(key)])
-       data={ user, repos }
-       setUserCache(key, data)
-      }catch(error){
-        main.innerHTML = `<p class="text-white">Utilisateur introuvable</p>`
-        throw new Error("Utilisateur introuvable")
-      }
-        
-    }
+let data = getUserCache(key)
+if (!data) {
+  try {
+    const [user, repos] = await Promise.all([getUser(key), getUserRepos(key)])
+    data = { user, repos }
+    setUserCache(key, data)
+  } catch (error) {
+    main.innerHTML = `<p class="text-white">Utilisateur introuvable</p>`
+    throw new Error("Utilisateur introuvable")
+  }
+
+}
 const user = data.user
 const userRepo = data.repos
 
@@ -67,17 +67,17 @@ export function displayProfile() {
         `
 
   total.textContent = user.public_repos
- 
+
 }
 // const userRepo = await getUserRepos(username)
 displayProfile();
 
 
-export async function displayRepo() {
+export async function displayRepo(list = userRepo) {
 
   repositories.innerHTML = ""
 
-  userRepo.forEach(repo => {
+  list.forEach(repo => {
 
     const diffMs = (new Date() - new Date(repo.updated_at).getTime())
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -110,7 +110,7 @@ export async function displayRepo() {
 
 }
 
-displayRepo()
+displayRepo(userRepo)
 
 
 const ajouter = document.querySelector("#btn-ajouter")
@@ -163,88 +163,35 @@ profil.addEventListener("click", e => {
 // })
 
 
-
-
-
-
-
+let depotInput = ""
+let filter = "tous"
 
 const input = document.querySelector("#input")
-
-let repos = document.querySelectorAll(".repo")
-// 
-input.addEventListener("input", () => {
-
-  let depotInput = input.value.toLowerCase().trim()
-  repos.forEach(p => {
-    let name = p.querySelector(".nameTitle").textContent.toLowerCase().trim()
-
-    if (name.includes(depotInput)) {
-      p.style.display = "block"
-    }
-    else {
-      p.style.display = "none"
-
-    }
-  })
-})
-
 const filtres = document.querySelectorAll(".filtre")
 
 
 
 filtres.forEach(btn => {
   btn.addEventListener("click", (e) => {
-    let filter = e.target.dataset.cat
-
-    if (filter === "tous") {
-      console.log(userRepo)
-    }
-    else {
-      console.log("filter:", filter.toLowerCase())
-
-      repos.forEach(p => {
-        let lang = p.querySelector(".lang").textContent.toLowerCase().trim()
-        // console.log("lang:",lang)
-        if (lang === filter.toLowerCase()) {
-          p.style.display = "block"
-        }
-        else {
-          p.style.display = "none"
-        }
-
-      })
-    }
+    filter = e.target.dataset.cat
+    filtredSearch()
   })
 })
+input.addEventListener("input", () => {
+  depotInput = input.value.toLowerCase().trim()
+  filtredSearch()
+})
 
-//my method of search and filter
+function filtredSearch() {
+  const searched = userRepo.filter(elt => elt.name.toLowerCase().includes(depotInput))
+  if (filter === "tous") {
+    displayRepo(searched)
+  } else {
+    let filtred = searched.filter(elt => (elt.language || "").toLowerCase() === filter.toLowerCase())
+    displayRepo(filtred)
+  }
+}
 
-// let depotInput = ""
-// let filter = "tous"
-
-// const input = document.querySelector("#input")
-// const filtres = document.querySelectorAll(".filtre")
-
-
-
-// filtres.forEach(btn => {
-//   btn.addEventListener("click", (e) => {
-//      filter = e.target.dataset.cat
-
-//   })
-// })
-//     input.addEventListener("input", () => {
-
-//        depotInput = input.value.toLowerCase().trim() })
-
-  
-//   let searched=userRepo.filter(elt=>elt.name.includes(depotInput))
-//   if(filter==="tous"){
-//     return searched;
-//   }else{
-//     return searched.filter(elt=>{elt.language.toLowerCase()===filter.toLowerCase()})
-//   }
 
 
 
