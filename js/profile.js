@@ -1,4 +1,5 @@
 import { getCandidats, getUser, getUserRepos } from "./api.js";
+import { getUserCache, setUserCache } from "./cache.js";
 import { api } from "./config.js";
 import { validation } from './validation.js'
 
@@ -7,15 +8,29 @@ const params = new URLSearchParams(window.location.search)
 const username = params.get("username")
 
 
-
+const main=document.querySelector(".main")
 const profile = document.querySelector("#aside")
 const repositories = document.querySelector("#section")
 const total = document.querySelector("#total-repos")
 
-const user = await getUser(username)
+// const user = await getUser(username)
+const key = username.toLowerCase()
+let data=getUserCache(key)
+if(!data){
+      try{
+const[user,repos]=await Promise.all([getUser(key),getUserRepos(key)])
+       data={ user, repos }
+       setUserCache(key, data)
+      }catch(error){
+        main.innerHTML = `<p class="text-white">Utilisateur introuvable</p>`
+        throw new Error("Utilisateur introuvable")
+      }
+        
+    }
+const user = data.user
+const userRepo = data.repos
 
 export function displayProfile() {
-
 
   const dateAcc = new Date(user.created_at).toLocaleDateString("fr-FR", { month: "long", year: "numeric" })
 
@@ -52,8 +67,9 @@ export function displayProfile() {
         `
 
   total.textContent = user.public_repos
+ 
 }
-const userRepo = await getUserRepos(username)
+// const userRepo = await getUserRepos(username)
 displayProfile();
 
 
@@ -175,12 +191,12 @@ input.addEventListener("input", () => {
 
 const filtres = document.querySelectorAll(".filtre")
 
-// let searched =userRepo.filter(elt=>elt.name.toLowerCase().includes(depotInput))
+
 
 filtres.forEach(btn => {
   btn.addEventListener("click", (e) => {
     let filter = e.target.dataset.cat
-    // console.log(filter)
+
     if (filter === "tous") {
       console.log(userRepo)
     }
@@ -198,10 +214,6 @@ filtres.forEach(btn => {
         }
 
       })
-      // let res= userRepo.filter(elt=>{elt.language==filter})
-      // console.table("other cat")
-
-
     }
   })
 })
@@ -215,14 +227,16 @@ filtres.forEach(btn => {
 // const filtres = document.querySelectorAll(".filtre")
 
 
+
 // filtres.forEach(btn => {
 //   btn.addEventListener("click", (e) => {
 //      filter = e.target.dataset.cat
+
 //   })
 // })
 //     input.addEventListener("input", () => {
 
-//        depotInput = input.value.toLowerCase().trim()})
+//        depotInput = input.value.toLowerCase().trim() })
 
   
 //   let searched=userRepo.filter(elt=>elt.name.includes(depotInput))

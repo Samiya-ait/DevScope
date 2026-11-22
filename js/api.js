@@ -1,10 +1,15 @@
 import { api } from "./config.js";
 
 
-
 export async function getUser(username) {
     try {
-        const response = await fetch(`https://api.github.com/users/${username}`)
+        const response = await fetch(`https://api.github.com/users/${username}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: "application/vnd.github+json"
+                }
+            })
 
         if (response.status === 404) {
             throw new Error("Aucun développeur trouvé");
@@ -31,7 +36,13 @@ export async function getUser(username) {
 export async function getUserRepos(username) {
     try {
         const response = await fetch(
-            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`)
+            `https://api.github.com/users/${username}/repos?per_page=12&sort=updated`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: "application/vnd.github+json"
+                }
+            })
 
         if (!response.ok) {
             throw new Error("Impossible de récupérer les repositories");
@@ -49,7 +60,13 @@ export async function getUserRepos(username) {
 
 export async function getCandidats() {
     try {
-        const response = await fetch(api)
+        const response = await fetch(api,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: "application/vnd.github+json"
+                }
+            })
         if (!response.ok) {
             throw new Error("impossible de récuperer les candidats")
         }
